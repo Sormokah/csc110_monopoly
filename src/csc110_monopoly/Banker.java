@@ -6,6 +6,8 @@ public class Banker
 	// haza house
 	// haza hotels
 	
+	// boolean hasProperty()
+	
 	
 	// loans
 	

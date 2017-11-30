@@ -1,5 +1,6 @@
 package csc110_monopoly;
 
-public class Player {
+public class Player 
+{
 
 }
