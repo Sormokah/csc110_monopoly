@@ -1,9 +1,5 @@
 package csc110_monopoly;
 
-<<<<<<< HEAD
-public class Chance 
-{
-=======
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -118,7 +114,7 @@ public class Chance {
 		//bank.pay($100);
 		cards.remove(15);
 	}
->>>>>>> 4433385c0b21458ca2f673f022835886c9153536
+
 
 	}
 }
