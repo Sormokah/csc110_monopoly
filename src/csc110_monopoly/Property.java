@@ -43,4 +43,9 @@ public class Property
 		this.hasAllOfColor = hasAllOfColor;
 		this.mortgaged = mortgaged;
 	}
+	
+	public void calculateRailroadRent(int railroadsOwned)
+	{
+		for(Player: )
+	}
 }
