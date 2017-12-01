@@ -6,7 +6,7 @@ public enum Properties
 	BalticAvenue,
 	OrientalAvenue,
 	VermontAvenue,
-	ConnecticusAvenue,
+	ConnecticutAvenue,
 	StCharlesPlace,
 	StatesAvenue,
 	VirginiaAvenue,
