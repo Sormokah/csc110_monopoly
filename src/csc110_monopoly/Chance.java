@@ -8,7 +8,7 @@ import com.oracle.xmlns.internal.webservices.jaxws_databinding.SoapBindingParame
 public class Chance {
 	ArrayList<Integer> cards = new ArrayList<>();
 	int maxCards = 16;
-	
+	Banker bank = new Banker();
 	
 	public void deckChanceCards() {
 		for(int i = 0; i < maxCards; i++) {
@@ -16,31 +16,34 @@ public class Chance {
 		}
 	}
 	
-	public void pickChance() {
+	public void pickChance(Player activePlayer) {
 	Random gen = new Random();
 	int card = gen.nextInt(maxCards);
 	
 	if(card == 1) {
 		System.out.println("Advance to Go (Collect $200)");
 		//move to GO board[0];
+		bank.pay(200, activePlayer);
 		cards.remove(0);
 	}
 	if(card == 2) {
 		System.out.println("Advance to Illinois Ave. - If you pass Go, collect $200");
 		// move to Illinois Ave. board[24]
+		//if player.spot > 24 bank.pay(200 , activePlayer);
 		//if board[24] is owned pay owner.
 		cards.remove(1);
 	}
 	if(card == 3) {
 		System.out.println("Advance to Illinois Ave. - If you pass Go, collect $200");
 		//move to St. charles board[11]
+		//if player.spot > 11 bank.pay(200 , activePlayer);
 		//if board[11] is owned pay owner.
 		cards.remove(2);
 	}
 	if(card == 4) {
 		System.out.println("Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total ten times the amount thrown.");
 		//if player.spot == 7 board[12]
-		//if player.spot == 36 board [12] banker.payGo();
+		//if player.spot == 36 board [12] bank.pay(200 , activePlayer);
 		//if player.spot == 22 board[28]
 		//if player.spot == owned pay owner 10x (2d6)
 		cards.remove(3);
@@ -55,12 +58,12 @@ public class Chance {
 	}
 	if(card == 6) {
 		System.out.println("Bank pays you dividend of $50");
-		//banker.pay($50)
+		bank.pay(50 , activePlayer);
 		cards.remove(5);
 	}
 	if(card == 7) {
 		System.out.println("Get out of Jail Free – This card may be kept until needed, or traded/sold");
-		//player.hasGetOutOfJailFreeChance = true;
+		activePlayer.hasGetOutOfJailFreeChance = true;
 		cards.remove(6);
 	}
 	if(card == 8) {
@@ -84,12 +87,12 @@ public class Chance {
 	}
 	if(card == 11) {
 		System.out.println("Pay poor tax of $15");
-		//payBank($15);
+		bank.payBank(15 , activePlayer);
 		cards.remove(10);
 	}
 	if(card == 12) {
 		System.out.println("Take a trip to Reading Railroad – If you pass Go, collect $200");
-		//if player.spot > 5 banker.payGo(); player.spot = 5;
+		//if player.spot > 5 bank.pay(200 , activePlayer); player.spot = 5;
 		//if player.spot < 5 player.spot = 5;
 		cards.remove(11);
 	}
@@ -106,12 +109,12 @@ public class Chance {
 	}
 	if(card == 15) {
 		System.out.println("Your building loan matures – Collect $150");
-		//bank.pay($150);
+		bank.pay(150 , activePlayer);
 		cards.remove(14);
 	}
 	if(card == 16) {
 		System.out.println("You have won a crossword competition - Collect $100");
-		//bank.pay($100);
+		bank.pay(100 , activePlayer);
 		cards.remove(15);
 	}
 
