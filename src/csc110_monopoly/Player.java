@@ -23,8 +23,11 @@ public class Player {
 	
 	private int turnsInJail;
 	
-	private boolean hasGetOutOfJailChest;
-	private boolean hasGetOutOfJailChance;
+	private boolean hasGetOutOfJailFreeChest;
+	
+	
+
+	private boolean hasGetOutOfJailFreeChance;
 	
 	
 	
@@ -119,7 +122,21 @@ public class Player {
 	public void setTurnsInJail(int turnsInJail) {
 		this.turnsInJail = turnsInJail;
 	}
-	
+	public boolean isHasGetOutOfJailFreeChest() {
+		return hasGetOutOfJailFreeChest;
+	}
+
+	public void setHasGetOutOfJailFreeChest(boolean hasGetOutOfJailFreeChest) {
+		this.hasGetOutOfJailFreeChest = hasGetOutOfJailFreeChest;
+	}
+
+	public boolean isHasGetOutOfJailFreeChance() {
+		return hasGetOutOfJailFreeChance;
+	}
+
+	public void setHasGetOutOfJailFreeChance(boolean hasGetOutOfJailFreeChance) {
+		this.hasGetOutOfJailFreeChance = hasGetOutOfJailFreeChance;
+	}
 	
 
 }

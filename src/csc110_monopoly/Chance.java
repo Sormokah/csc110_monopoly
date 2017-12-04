@@ -63,7 +63,7 @@ public class Chance {
 	}
 	if(card == 7) {
 		System.out.println("Get out of Jail Free – This card may be kept until needed, or traded/sold");
-		activePlayer.hasGetOutOfJailFreeChance = true;
+		activePlayer.setHasGetOutOfJailFreeChance(true);
 		cards.remove(6);
 	}
 	if(card == 8) {
