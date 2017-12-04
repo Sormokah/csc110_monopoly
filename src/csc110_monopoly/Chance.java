@@ -34,7 +34,7 @@ public class Chance {
 		cards.remove(1);
 	}
 	if(card == 3) {
-		System.out.println("Advance to Illinois Ave. - If you pass Go, collect $200");
+		System.out.println("Advance to St. Charles Place - If you pass Go, collect $200");
 		//move to St. charles board[11]
 		//if player.spot > 11 bank.pay(200 , activePlayer);
 		//if board[11] is owned pay owner.
