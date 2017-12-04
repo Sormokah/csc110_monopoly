@@ -14,5 +14,6 @@ public class Board {
 	
 	private void initializeBoard() {
 		//fill the spots of the array with the values from the enum
+		
 	}
 }

@@ -46,6 +46,6 @@ public class Property
 	
 	public void calculateRailroadRent(int railroadsOwned)
 	{
-		for(Player: )
+		//for(Player: )
 	}
 }

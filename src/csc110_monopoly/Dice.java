@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Dice 
 {
+	private final int sidesOnDie = 6;
 	private int diceTotal;
 	private Random gen = new Random();
 	
@@ -15,16 +16,19 @@ public class Dice
 	// if Game.speed
 		// roll speed
 	
-	public void roll()
+	public void roll(Player activePlayer)
 	{
-		int die1 = rollD6();
-		int die2 = rollD6();
-		diceTotal = die1+die2;
-		if(Game.Speed)
+		activePlayer.setDie1(rollD6());
+		activePlayer.setDie2(rollD6());
+		activePlayer.setRoll(activePlayer.getDie1()+activePlayer.getDie2());
+		if(Monopoly.g1.getSpeed() && activePlayer.isAroundOnce())
 		{
 			interperateSpeed(rollSpeed());
 		}
-		
+		else
+		{
+			activePlayer.movePlayer(activePlayer.getRoll());
+		}
 	}
 	
 	
@@ -54,12 +58,12 @@ public class Dice
 
 	public int rollD6()
 	{
-		return gen.nextInt(6)+1;//retruns random number from 1-6
+		return gen.nextInt(sidesOnDie)+1;//retruns random number from 1-6
 	}
 	
 	private Speed rollSpeed()
 	{
-		int outcome = gen.nextInt(6)+1;
+		int outcome = gen.nextInt(sidesOnDie)+1;
 		switch(outcome)
 		{
 			case 1:
