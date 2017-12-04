@@ -23,17 +23,20 @@ public class Player {
 	
 	private int turnsInJail;
 	
+	private boolean hasGetOutOfJailChest;
+	private boolean hasGetOutOfJailChance;
 	
 	
-	public void movePlayer(int distance)
+	
+	public void movePlayer()
 	{
-		if((this.location + distance) > 39)
+		if((this.location + this.roll) > 39)
 		{
-			this.location = (location + distance - BOARD_LENGTH);
+			this.location = (location + this.roll - BOARD_LENGTH);
 		}
 		else
 		{
-			location += distance;
+			this.location = this.location + this.roll;
 		}
 	}
 	
@@ -62,7 +65,7 @@ public class Player {
 	}
 
 	public int getLocation() {
-		return this.roll;
+		return this.location;
 	}
 
 	public void setLocation(int location) {

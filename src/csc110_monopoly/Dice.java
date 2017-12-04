@@ -8,13 +8,7 @@ public class Dice
 	private int diceTotal;
 	private Random gen = new Random();
 	
-	//2d6
-	
-	//boolean speed :(
-	
-	//public void roll()
-	// if Game.speed
-		// roll speed
+
 	
 	public void roll(Player activePlayer)
 	{
@@ -27,7 +21,7 @@ public class Dice
 		}
 		else
 		{
-			activePlayer.movePlayer(activePlayer.getRoll());
+			activePlayer.movePlayer();
 		}
 	}
 	
