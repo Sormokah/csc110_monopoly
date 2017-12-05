@@ -107,6 +107,11 @@ public class Game {
 
 	private void interperateCurrentSpace() {
 		
+		for(Properties p: Properties.values())
+		{
+			
+		}
+		
 		
 	}
 
