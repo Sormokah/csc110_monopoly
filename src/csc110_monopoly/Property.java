@@ -22,7 +22,7 @@ public class Property
 	private int mortgageValue;
 	private boolean mortgaged;
 	private int location;
-	fds
+//	fds
 	int houseCost;
 	
 	
