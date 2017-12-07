@@ -201,7 +201,7 @@ public class Chance {
 	}
 
 	public boolean validPicker(boolean validPick, int card) {
-		for (int i = 0; i < maxCards; i++) {
+		for (int i = 0; i < picked.size(); i++) {
 			if (card == picked.get(i)) {
 				return false;
 			}

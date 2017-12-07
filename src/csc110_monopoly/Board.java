@@ -28,7 +28,7 @@ public class Board {
 						 + "|____|                                            |____|" + '\n'
 						 + "|[??]|                                            |VIRG|" + '\n'
 						 + "|____|                Monopoly                    |____|" + '\n'
-						 + "|SHRT|           JAVA Console Edition             |PENR|" + '\n'
+						 + "|SHRT|          SAD JAVA Console Edition          |PENR|" + '\n'
 						 + "|____|                                            |____|" + '\n'
 						 + "|PN-A|                                            |ST.J|" + '\n'
 						 + "|____|                                            |____|" + '\n'

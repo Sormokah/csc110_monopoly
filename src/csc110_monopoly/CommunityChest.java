@@ -83,12 +83,12 @@ public class CommunityChest {
 	}
 	if(card == 6) {
 		System.out.println("Grand Opera Night – Collect $50 from every player for opening night seats");
-		ArrayList<Player> inactivePlayers = Monopoly.g1.getInactivePlayers();
-		for(Player p: inactivePlayers)
-		{
-			p.setMoney(p.getMoney() - 50);
-			Monopoly.g1.getActivePlayer().setMoney(Monopoly.g1.getActivePlayer().getMoney() + 50);
-		}
+//		ArrayList<Player> inactivePlayers = Monopoly.g1.getInactivePlayers();
+//		for(Player p: inactivePlayers)
+//		{
+//			p.setMoney(p.getMoney() - 50);
+//			Monopoly.g1.getActivePlayer().setMoney(Monopoly.g1.getActivePlayer().getMoney() + 50);
+//		}
 		picked.add(6);
 		maxCards--;
 	}
@@ -150,7 +150,7 @@ public class CommunityChest {
 
 	}
 	public boolean validPicker(boolean validPick, int card) {
-		for (int i = 0; i < maxCards; i++) {
+		for (int i = 0; i < picked.size(); i++) {
 			if (card == picked.get(i)) {
 				return false;
 			}

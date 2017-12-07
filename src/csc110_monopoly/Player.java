@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Player {
 	private ArrayList<Property> properties = new ArrayList<>();
 	
+	private Property currentSpace;
+	
 	private int utilitiesOwned = 0;
 	
 	private int railroadsOwned = 0;
@@ -195,6 +197,22 @@ public class Player {
 
 	public void setHotels(int hotels) {
 		this.hotels = hotels;
+	}
+
+	public ArrayList<Property> getProperties() {
+		return properties;
+	}
+
+	public void setProperties(ArrayList<Property> properties) {
+		this.properties = properties;
+	}
+
+	public Property getCurrentSpace() {
+		return currentSpace;
+	}
+
+	public void setCurrentSpace(Property currentSpace) {
+		this.currentSpace = currentSpace;
 	}
 	
 

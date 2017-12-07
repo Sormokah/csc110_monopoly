@@ -7,6 +7,11 @@ import sun.security.pkcs11.P11TlsKeyMaterialGenerator;
 
 public class Game {
 
+	PropertyGenerator generator = new PropertyGenerator();
+	CommunityChest chest = new CommunityChest();
+	Chance chance = new Chance();
+	ArrayList<Property> propertiesToLandOn = generator.propertiesToLandOn;
+	Board b1 = new Board();
 	public Dice die = new Dice();
 	
 	private boolean speed;
@@ -24,7 +29,7 @@ public class Game {
 	private int activePlayerIndex;
 
 	public void initializeGame() throws IOException {
-
+		generator.generateProperty();
 		speed = determineSpeedDie();
 		int ammountOfPlayers = getNumberOfPlayers();
 		createPlayers(ammountOfPlayers);
@@ -71,6 +76,7 @@ public class Game {
 		//if doubles reroll
 		//if doubles 3 times go to jail.
 		//if jail , jail menu
+		b1.printBoard();
 		if(!activePlayer.isInJail()) {
 		
 		int doubleCount = 0;
@@ -144,9 +150,26 @@ public class Game {
 
 	private void interperateCurrentSpace() {
 		
-		for(Properties p: Properties.values())
+		for(Property p: propertiesToLandOn)
 		{
-			
+			if(activePlayer.getLocation() == p.getLocation())
+			{
+				activePlayer.setCurrentSpace(p);
+				break;
+			}
+		}
+		if(activePlayer.getCurrentSpace().equals(generator.CommunityChest17) || activePlayer.getCurrentSpace().equals(generator.CommunityChest2) || activePlayer.getCurrentSpace().equals(generator.CommunityChest33))
+		{
+			chest.pickChest(activePlayer);
+		}
+		else if(activePlayer.getCurrentSpace().equals(generator.Chance22) || activePlayer.getCurrentSpace().equals(generator.Chance36) || activePlayer.getCurrentSpace().equals(generator.Chance7))
+		{
+			chance.pickChance(activePlayer);
+		}
+		else if(activePlayer.getCurrentSpace().equals(generator.GoToJail))
+		{
+			activePlayer.setLocation(10);
+			activePlayer.setInJail(true);
 		}
 		
 		
@@ -173,7 +196,7 @@ public class Game {
 		System.out.println(activePlayer.getPiece() + ", you are going first with a roll of: " + highestRoll + ".");
 
 	}
-
+ 
 	private boolean validRoll(ArrayList<Integer> playerRolls) {
 
 		playerRolls.sort(null);
