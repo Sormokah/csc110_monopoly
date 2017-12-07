@@ -15,18 +15,11 @@ public class Dice
 		activePlayer.setDie1(rollD6());
 		activePlayer.setDie2(rollD6());
 		activePlayer.setRoll(activePlayer.getDie1()+activePlayer.getDie2());
-		if(Monopoly.g1.getSpeed() && activePlayer.isAroundOnce())
-		{
-			interperateSpeed(rollSpeed());
-		}
-		else
-		{
-			activePlayer.movePlayer();
-		}
+		
 	}
 	
 	
-	private void interperateSpeed(Speed speed)
+	public void interperateSpeed(Speed speed)
 	{
 		switch(speed)
 		{

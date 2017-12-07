@@ -8,13 +8,17 @@ public class Game {
 	public Dice die = new Dice();
 	
 	private boolean speed;
-
+	private boolean gameOver;
 	public boolean getSpeed() {
 		return this.speed;
 	}
 
 	private ArrayList<Player> players = new ArrayList<>();
 	private Player activePlayer;
+	public Player getActivePlayer()
+	{
+		return activePlayer;
+	}
 	private int activePlayerIndex;
 
 	public void initializeGame() throws IOException {
@@ -39,8 +43,11 @@ public class Game {
 	}
 
 	private void playGame() throws IOException {
-		takeTurn();
-		nextPlayer();
+		while(!gameOver)
+		{
+			takeTurn();
+			nextPlayer();
+		}
 	}
 
 	private void nextPlayer() throws IOException {
@@ -54,7 +61,7 @@ public class Game {
 			activePlayer = players.get(0);
 			activePlayerIndex = 0;
 		}
-		playGame();
+		
 	}
 
 	private void takeTurn() throws IOException {
@@ -63,12 +70,18 @@ public class Game {
 		{
 			System.out.println("Player " + activePlayer.getPiece() + ", it is your turn.");
 			die.roll(activePlayer);
+			boolean doubles = checkForDoubles();
+			activePlayer.setLocation(activePlayer.getLocation() + activePlayer.getRoll());
 			System.out.println("Player " + activePlayer.getPiece() + ", you rolled " + activePlayer.getDie1() + " and " + activePlayer.getDie2() + " for a total of " + (activePlayer.getDie1() + activePlayer.getDie2()) + " spaces.");
 			System.out.println("You are now on space " + activePlayer.getLocation() + ".\n");
 			interperateCurrentSpace();
 			//turn menu
-			checkForDoubles();
-			ConsoleUI.promptForInput("Continue?", true);
+			if(doubles)
+			{
+				interperateDoubles();
+			}
+			//ConsoleUI.promptForInput("Continue?", true);
+			
 		}
 		else
 		{
@@ -83,26 +96,35 @@ public class Game {
 		
 	}
 
+	private void interperateDoubles() throws IOException {
+		activePlayer.setDoubleCount(activePlayer.getDoubleCount() + 1);
+		if(activePlayer.getDoubleCount() == 3)
+		{
+			activePlayer.setInJail(true);
+			activePlayer.setLocation(10);
+			activePlayer.setDoubleCount(0);
+		}
+		else
+		{
+			takeTurn();
+		}
+		
+	}
+
 	private void jailMenu() throws IOException {
 		String[] jailMenuChoices = {"Roll", "Use Get out of jail free card", "Trade", "Buy houses/hotels", "Pay to get out"};
 		ConsoleUI.promptForMenuSelection(jailMenuChoices, false);
 	}
 
-	private void checkForDoubles() {
+	private boolean checkForDoubles() throws IOException {
 		if(activePlayer.getDie1() == activePlayer.getDie2())
 		{
-			if(activePlayer.getDoubleCount() == 3)
-			{
-				activePlayer.setLocation(10);//jail
-				activePlayer.setInJail(true);
-			}
-			activePlayer.setDoubleCount(activePlayer.getDoubleCount() + 1);
-			die.roll(activePlayer);
-			//turn menu
-			interperateCurrentSpace();
-			checkForDoubles();
+			return true;
 		}
-		
+		else
+		{
+			return false;
+		}
 	}
 
 	private void interperateCurrentSpace() {
@@ -239,4 +261,11 @@ public class Game {
 
 	}
 
+	public ArrayList<Player> getInactivePlayers()
+	{
+		ArrayList<Player> inactivePlayers = players;
+		inactivePlayers.remove(activePlayer);
+		//ArrayList<Player> inactivePlayers = players.remove(activePlayer);
+		return inactivePlayers;
+	}
 }

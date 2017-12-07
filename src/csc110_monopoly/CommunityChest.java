@@ -23,7 +23,7 @@ public class CommunityChest {
 	
 	if(card == 0) {
 		System.out.println("Advance to Go (Collect $200)");
-		//activePlayer.setLocation(0);
+		activePlayer.setLocation(0);
 		bank.pay(200, activePlayer);
 		cards.remove(0);
 	}
@@ -49,14 +49,18 @@ public class CommunityChest {
 	}
 	if(card == 5) {
 		System.out.println("Go to Jail – Go directly to jail – Do not pass Go – Do not collect $200");
-		//activePlayer.setLocation(10);
-		//activePlayer.isInJail = true;
+		activePlayer.setLocation(10);
+		activePlayer.setInJail(true);
 		cards.remove(5);
 	}
 	if(card == 6) {
 		System.out.println("Grand Opera Night – Collect $50 from every player for opening night seats");
-		//remove $50 from all players minus this.playersTurn 
-		//add (# of players -1)50 to currPlayer.
+		ArrayList<Player> inactivePlayers = Monopoly.g1.getInactivePlayers();
+		for(Player p: inactivePlayers)
+		{
+			p.setMoney(p.getMoney() - 50);
+			Monopoly.g1.getActivePlayer().setMoney(Monopoly.g1.getActivePlayer().getMoney() + 50);
+		}
 		cards.remove(6);
 	}
 	if(card == 7) {

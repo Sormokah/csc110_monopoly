@@ -9,6 +9,9 @@ public class Monopoly
 	{
 		
 			g1.initializeGame();
+			//Board b1 = new Board();
+			
+			//b1.printBoard();
 	}
 
 }

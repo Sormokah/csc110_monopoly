@@ -78,6 +78,7 @@ public class PropertyGenerator {
 		PennsylvaniaAvenue = new Property(Properties.PennsylvaniaAvenue, 320, Colors.Green, 28, 150, 450, 1000, 1200, 1400, 160, 200, false, false, 34);
 		ParkPlace = new Property(Properties.ParkPlace, 350, Colors.Navy, 35, 175, 500, 1100, 1300, 1500, 175, 200, false, false, 37);
 		Boardwalk = new Property(Properties.Boardwalk, 400, Colors.Navy, 50, 200, 600, 1400, 1700, 2000, 200, 200, false, false, 38);
+		
 		ElectricCompany = new Property(Properties.ElectricCompany, 150, Colors.Utility, 75, false, false, 22);
 		WaterWorks = new Property(Properties.WaterWorks, 150, Colors.Utility, 75, false, false, 28);
 		ReadingRailroad = new Property(Properties.ReadingRailroad, 200, Colors.Railroad, 100, false, false, 5);

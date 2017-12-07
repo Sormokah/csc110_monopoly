@@ -1,6 +1,14 @@
 package csc110_monopoly;
 
+import java.util.ArrayList;
+
 public class Player {
+	private ArrayList<Property> properties = new ArrayList<>();
+	
+	private int utilitiesOwned = 0;
+	
+	private int railroadsOwned = 0;
+	
 	private Pieces piece;
 
 	private final int BOARD_LENGTH = 40;
@@ -25,11 +33,29 @@ public class Player {
 	
 	private boolean hasGetOutOfJailFreeChest;
 	
+	private int houses = 0;
 	
+	private int hotels = 0;
 
 	private boolean hasGetOutOfJailFreeChance;
 	
+	public void newProperty(Property name)
+	{
+		properties.add(name);
+	}
 	
+	public void adjustHousesAndHotels()
+	{
+		for(Property p: properties)
+		{
+			this.houses += p.getHousesOnProperty();
+			if(p.isHasHotel())
+			{
+				this.hotels++;
+			}
+		}
+		
+	}
 	
 	public void movePlayer()
 	{
@@ -43,6 +69,22 @@ public class Player {
 		}
 	}
 	
+	public int getUtilitiesOwned() {
+		return utilitiesOwned;
+	}
+
+	public void setUtilitiesOwned(int utilitiesOwned) {
+		this.utilitiesOwned = utilitiesOwned;
+	}
+
+	public int getRailroadsOwned() {
+		return railroadsOwned;
+	}
+
+	public void setRailroadsOwned(int railroadsOwned) {
+		this.railroadsOwned = railroadsOwned;
+	}
+
 	public Pieces getPiece() {
 		return this.piece;
 	}
@@ -136,6 +178,22 @@ public class Player {
 
 	public void setHasGetOutOfJailFreeChance(boolean hasGetOutOfJailFreeChance) {
 		this.hasGetOutOfJailFreeChance = hasGetOutOfJailFreeChance;
+	}
+
+	public int getHouses() {
+		return houses;
+	}
+
+	public void setHouses(int houses) {
+		this.houses = houses;
+	}
+
+	public int getHotels() {
+		return hotels;
+	}
+
+	public void setHotels(int hotels) {
+		this.hotels = hotels;
 	}
 	
 
