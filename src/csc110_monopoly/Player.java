@@ -62,6 +62,7 @@ public class Player {
 		if((this.location + this.roll) > 39)
 		{
 			this.location = (location + this.roll - BOARD_LENGTH);
+			this.aroundOnce = true;
 		}
 		else
 		{

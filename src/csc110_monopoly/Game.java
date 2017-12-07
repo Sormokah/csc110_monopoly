@@ -3,6 +3,8 @@ package csc110_monopoly;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import sun.security.pkcs11.P11TlsKeyMaterialGenerator;
+
 public class Game {
 
 	public Dice die = new Dice();
@@ -68,47 +70,119 @@ public class Game {
 		
 		if(!activePlayer.isInJail())
 		{
-			System.out.println("Player " + activePlayer.getPiece() + ", it is your turn.");
-			die.roll(activePlayer);
-			boolean doubles = checkForDoubles();
-			activePlayer.setLocation(activePlayer.getLocation() + activePlayer.getRoll());
-			System.out.println("Player " + activePlayer.getPiece() + ", you rolled " + activePlayer.getDie1() + " and " + activePlayer.getDie2() + " for a total of " + (activePlayer.getDie1() + activePlayer.getDie2()) + " spaces.");
-			System.out.println("You are now on space " + activePlayer.getLocation() + ".\n");
-			interperateCurrentSpace();
-			//turn menu
-			if(doubles)
+			for(int i = 0; i<3; i++)
 			{
-				interperateDoubles();
+				die.roll(activePlayer);
+				movePlayer();
+				if(!checkForDoubles())
+				{
+					break;
+				}
+				else if(activePlayer.getDoubleCount() == 3)
+				{
+					activePlayer.setLocation(10);
+					activePlayer.setInJail(true);
+				}
 			}
-			//ConsoleUI.promptForInput("Continue?", true);
-			
 		}
 		else
 		{
-			//jail logic
-			if(activePlayer.getTurnsInJail() < 3)
-			{
-				jailMenu();
-			}
-			
+			jailMenu();
 		}
+		
+//		if(!activePlayer.isInJail())
+//		{
+//			die.roll(activePlayer);
+//			boolean doubles = checkForDoubles();
+//			movePlayer();
+//			if(doubles)
+//			{
+//				interperateDoubles();
+//			}
+//			activePlayer.setDoubleCount(0);
+//		}
+//		else 
+//		{
+//			ConsoleUI.promptForInput("Continue?", true);
+//		}
+		
+		
+		
+		
+		
 		
 		
 	}
+		public ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+		private void movePlayer() {
+		activePlayer.movePlayer();
+		System.out.println("Player " + activePlayer.getPiece() + ", you rolled " + activePlayer.getDie1() + " and " + activePlayer.getDie2() + " for a total of " + (activePlayer.getDie1() + activePlayer.getDie2()) + " spaces.");
+		System.out.println("You are now on space " + activePlayer.getLocation() + ".\n");
+	}
+
+		//old take turn
+//		if(!activePlayer.isInJail())
+//		{
+//			System.out.println("Player " + activePlayer.getPiece() + ", it is your turn.");
+//			die.roll(activePlayer);
+//			boolean doubles = checkForDoubles();
+//			activePlayer.setLocation(activePlayer.getLocation() + activePlayer.getRoll());
+//			System.out.println("Player " + activePlayer.getPiece() + ", you rolled " + activePlayer.getDie1() + " and " + activePlayer.getDie2() + " for a total of " + (activePlayer.getDie1() + activePlayer.getDie2()) + " spaces.");
+//			System.out.println("You are now on space " + activePlayer.getLocation() + ".\n");
+//			interperateCurrentSpace();
+//			//turn menu
+//			if(doubles)
+//			{
+//				interperateDoubles();
+//			}
+//			//ConsoleUI.promptForInput("Continue?", true);
+//			
+//		}
+//		else
+//		{
+//			//jail logic
+//			if(activePlayer.getTurnsInJail() < 3)
+//			{
+//				jailMenu();
+//			}
+//			
+//		}
+//		
+//		
+	
 
 	private void interperateDoubles() throws IOException {
 		activePlayer.setDoubleCount(activePlayer.getDoubleCount() + 1);
-		if(activePlayer.getDoubleCount() == 3)
+		
+		switch(activePlayer.getDoubleCount())
 		{
+		case 1:
+			takeTurn();
+			break;
+		case 2:
+			takeTurn();
+			break;
+		case 3:
 			activePlayer.setInJail(true);
 			activePlayer.setLocation(10);
 			activePlayer.setDoubleCount(0);
-		}
-		else
-		{
-			takeTurn();
+			break;
 		}
 		
+//		if(activePlayer.getDoubleCount() == 3)
+//		{
+//			activePlayer.setInJail(true);
+//			activePlayer.setLocation(10);
+//			activePlayer.setDoubleCount(0);
+//		}
+//		else
+//		{
+//			movePlayer();
+//		}
+//		
 	}
 
 	private void jailMenu() throws IOException {
