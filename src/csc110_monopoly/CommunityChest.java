@@ -11,16 +11,16 @@ public class CommunityChest {
 	int maxCards = 16;
 	Banker bank = new Banker();
 	
-	public void deckChanceCards() {
+	public void deckChestCards() {
 		for(int i = 0; i < maxCards; i++) {
 			cards.add(i);
 		}
 	}
 	
-	public void pickChance(Player activePlayer) {
+	public void pickChest(Player activePlayer) {
 	Random gen = new Random();
 	if(maxCards == 0) {
-		deckChanceCards();
+		deckChestCards();
 		//check players for getoutofjailChest.
 		//if player.getoutofjailchest = true
 		//cards.remove(4);
@@ -115,8 +115,8 @@ public class CommunityChest {
 	}
 	if(card == 13) {
 		System.out.println("You are assessed for street repairs – $40 per house – $115 per hotel");
-		//for loop, count houses times($25) payBank(amount);
-		//for loop, count hotels times($100) payBank(amount);
+		bank.payBank((activePlayer.getHouses() * 40) , activePlayer);
+		bank.payBank((activePlayer.getHotels() * 115) , activePlayer);
 		cards.remove(13);
 		maxCards--;
 	}
