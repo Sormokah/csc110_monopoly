@@ -67,127 +67,68 @@ public class Game {
 	}
 
 	private void takeTurn() throws IOException {
+		//if not in jail roll 2d6  {KISS DRY}
+		//if doubles reroll
+		//if doubles 3 times go to jail.
+		//if jail , jail menu
+		if(!activePlayer.isInJail()) {
 		
-		if(!activePlayer.isInJail())
-		{
-			for(int i = 0; i<3; i++)
-			{
-				die.roll(activePlayer);
-				movePlayer();
-				if(!checkForDoubles())
-				{
-					break;
-				}
-				else if(activePlayer.getDoubleCount() == 3)
-				{
-					activePlayer.setLocation(10);
-					activePlayer.setInJail(true);
-				}
-			}
+		int doubleCount = 0;
+		while(doubleCount < 3) {
+		die.roll(activePlayer);
+		if(checkForDoubles()) {
+			doubleCount++;
 		}
-		else
+		if(doubleCount != 3)
 		{
+		movePlayer();
+		interperateCurrentSpace(); //fill out this method
+		}
+		if(!checkForDoubles()) {
+			break;
+		}
+		if(doubleCount == 3) {
+			System.out.println("You rolled a third set of doubles! You're going to jail!");
+			activePlayer.setLocation(10);
+			activePlayer.setInJail(true);
+		}
+		}
+		}
+		else {
 			jailMenu();
 		}
-		
-//		if(!activePlayer.isInJail())
-//		{
-//			die.roll(activePlayer);
-//			boolean doubles = checkForDoubles();
-//			movePlayer();
-//			if(doubles)
-//			{
-//				interperateDoubles();
-//			}
-//			activePlayer.setDoubleCount(0);
-//		}
-//		else 
-//		{
-//			ConsoleUI.promptForInput("Continue?", true);
-//		}
-		
-		
-		
-		
-		
-		
-		
 	}
+		
 		public ArrayList<Player> getPlayers() {
 		return players;
 	}
 
 		private void movePlayer() {
+		
 		activePlayer.movePlayer();
 		System.out.println("Player " + activePlayer.getPiece() + ", you rolled " + activePlayer.getDie1() + " and " + activePlayer.getDie2() + " for a total of " + (activePlayer.getDie1() + activePlayer.getDie2()) + " spaces.");
 		System.out.println("You are now on space " + activePlayer.getLocation() + ".\n");
+		
 	}
 
-		//old take turn
-//		if(!activePlayer.isInJail())
-//		{
-//			System.out.println("Player " + activePlayer.getPiece() + ", it is your turn.");
-//			die.roll(activePlayer);
-//			boolean doubles = checkForDoubles();
-//			activePlayer.setLocation(activePlayer.getLocation() + activePlayer.getRoll());
-//			System.out.println("Player " + activePlayer.getPiece() + ", you rolled " + activePlayer.getDie1() + " and " + activePlayer.getDie2() + " for a total of " + (activePlayer.getDie1() + activePlayer.getDie2()) + " spaces.");
-//			System.out.println("You are now on space " + activePlayer.getLocation() + ".\n");
-//			interperateCurrentSpace();
-//			//turn menu
-//			if(doubles)
-//			{
-//				interperateDoubles();
-//			}
-//			//ConsoleUI.promptForInput("Continue?", true);
-//			
-//		}
-//		else
-//		{
-//			//jail logic
-//			if(activePlayer.getTurnsInJail() < 3)
-//			{
-//				jailMenu();
-//			}
-//			
-//		}
-//		
-//		
 	
 
-	private void interperateDoubles() throws IOException {
-		activePlayer.setDoubleCount(activePlayer.getDoubleCount() + 1);
-		
-		switch(activePlayer.getDoubleCount())
-		{
-		case 1:
-			takeTurn();
-			break;
-		case 2:
-			takeTurn();
-			break;
-		case 3:
-			activePlayer.setInJail(true);
-			activePlayer.setLocation(10);
-			activePlayer.setDoubleCount(0);
-			break;
-		}
-		
-//		if(activePlayer.getDoubleCount() == 3)
-//		{
-//			activePlayer.setInJail(true);
-//			activePlayer.setLocation(10);
-//			activePlayer.setDoubleCount(0);
-//		}
-//		else
-//		{
-//			movePlayer();
-//		}
-//		
-	}
-
 	private void jailMenu() throws IOException {
-		String[] jailMenuChoices = {"Roll", "Use Get out of jail free card", "Trade", "Buy houses/hotels", "Pay to get out"};
-		ConsoleUI.promptForMenuSelection(jailMenuChoices, false);
+//		String[] jailMenuChoicesWithGetOut = {"Roll", "Use Get out of jail free card", "Buy houses/hotels", "Pay to get out"};
+//		String[] jailMenuC
+//		switch(ConsoleUI.promptForMenuSelection(jailMenuChoices, false))
+//		{
+//		case 1:
+//			rollToGetOut();
+//			break;
+//		case 2:
+//			useGetOutOfJail();
+//			break;
+//		case 3:
+//			break;
+//		case 4:
+//			break;
+//		}
 	}
 
 	private boolean checkForDoubles() throws IOException {
